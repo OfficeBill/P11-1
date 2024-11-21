@@ -1,4 +1,4 @@
-// File Name:     Tic Tac D'oh
+// File Name:     P11-1
 // Author:        William Inkrott
 // Date:          11/21/24
 // Description:   Reserve seats on a plane using a 2-dimensional array and the requested functions. 
@@ -11,16 +11,18 @@
 
 using namespace std;
 
+const int ROWS = 13;
+
 int findRowIndex(int thisRow);
 int findSeatIndex(char thisSeat);
-/*
 void displaySeatColumn(char seats[][ROWS], int column);
-*/
 int letterFinder(char thisSeat);
+
+
 
 int main(void)
 {
-	int thisRow, validRow = 0, validSeat = 0, alphaNumera = 0;
+	int thisRow, validRow = 0, validSeat = 0, alphaNumera = 0, column = 8;
 	char thisSeat;
 	char seats[8][13]{
 		{'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', ' '},
@@ -35,6 +37,7 @@ int main(void)
 	while (1 == 1)
 	{
 		//beginning of loop
+		displaySeatColumn(seats, column);
 		cout << "Enter a seat or Q to quit: ";
 		cin >> thisRow;
 		cin >> thisSeat;
@@ -111,19 +114,21 @@ int findSeatIndex(char thisSeat)
 		return 1;
 	}
 }
-/*
+
 void displaySeatColumn(char seats[][ROWS], int column)
 {
-	for (int i = 0; i < 8; i++)
+	cout << endl;
+	for (int i = 0; i < column; i++)
 	{
-		for (int j = 0; j < 13; j++)
+		for (int j = 0; j < ROWS; j++)
 		{
 			cout << seats[i][j] << " ";
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
-*/
+
 int letterFinder(char thisSeat)
 {
 	if (thisSeat == 'A')
