@@ -16,9 +16,11 @@ int findSeatIndex(char thisSeat);
 /*
 void displaySeatColumn(char seats[][ROWS], int column);
 */
+int letterFinder(char thisSeat);
+
 int main(void)
 {
-	int thisRow, validRow = 0, validSeat = 0;
+	int thisRow, validRow = 0, validSeat = 0, alphaNumera = 0;
 	char thisSeat;
 	char seats[8][13]{
 		{'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', ' '},
@@ -30,22 +32,9 @@ int main(void)
 		{'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'},
 		{'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A'},
 	};
-
-
-
-	for (int i = 0; i < 8; i++)
-	{
-		for (int j = 0; j < 13; j++)
-		{
-			cout << seats[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-
-
 	while (1 == 1)
 	{
+		//beginning of loop
 		cout << "Enter a seat or Q to quit: ";
 		cin >> thisRow;
 		cin >> thisSeat;
@@ -55,17 +44,43 @@ int main(void)
 			validSeat = findSeatIndex(thisSeat);
 			if (validSeat == 0)
 			{
-				
+				// within proper range
+				alphaNumera = letterFinder(thisSeat);
+				alphaNumera = alphaNumera - 1;
+				thisRow = thisRow - 1;
+				if (seats[alphaNumera][thisRow] == 'X')
+				{
+					cout << endl;
+					cout << "Seat already assigned." << endl;
+					cout << endl;
+				}
+				else if (thisRow == 12 && (alphaNumera == 0 or alphaNumera == 1))
+				{
+					//seat 13 DNE in rows D and C
+					cout << "Sorry, no such seat exists on the CRJ 200." << endl;
+					validRow = 0;
+					validSeat = 0;
+				}
+				else
+				{
+					seats[alphaNumera][thisRow] = 'X';
+				}
 			}
 			else
 			{
 				cout << "Sorry, no such seat exists on the CRJ 200." << endl;
-				validRow = 0;
-				validSeat = 0;
 			}
+		}
+		else if (validRow == 1)
+		{
+			//row is out of range
+			cout << "Sorry, no such seat exists on the CRJ 200." << endl;
+			validRow = 0;
+			validSeat = 0;
 		}
 		else
 		{
+			//row is within range, column is not
 			cout << "Sorry, no such seat exists on the CRJ 200." << endl;
 			validRow = 0;
 			validSeat = 0;
@@ -75,7 +90,7 @@ int main(void)
 
 int findRowIndex(int thisRow)
 {
-	if (thisRow > 0 and thisRow < 9)
+	if (thisRow > 0 and thisRow < 14)
 	{
 		return 0;
 	}
@@ -109,3 +124,22 @@ void displaySeatColumn(char seats[][ROWS], int column)
 	}
 }
 */
+int letterFinder(char thisSeat)
+{
+	if (thisSeat == 'A')
+	{
+		return 8;
+	}
+	if (thisSeat == 'B')
+	{
+		return 7;
+	}
+	if (thisSeat == 'C')
+	{
+		return 2;
+	}
+	if (thisSeat == 'D')
+	{
+		return 1;
+	}
+}
