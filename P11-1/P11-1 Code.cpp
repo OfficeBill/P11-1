@@ -13,11 +13,12 @@ using namespace std;
 
 int findRowIndex(int thisRow);
 int findSeatIndex(char thisSeat);
+/*
 void displaySeatColumn(char seats[][ROWS], int column);
-
+*/
 int main(void)
 {
-	int thisRow;
+	int thisRow, validRow = 0, validSeat = 0;
 	char thisSeat;
 	char seats[8][13]{
 		{'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', ' '},
@@ -29,20 +30,73 @@ int main(void)
 		{'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'},
 		{'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A'},
 	};
-	cout << "Enter a seat or Q to quit: ";
-	cin >>
+
+
+
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 13; j++)
+		{
+			cout << seats[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+
+
+	while (1 == 1)
+	{
+		cout << "Enter a seat or Q to quit: ";
+		cin >> thisRow;
+		cin >> thisSeat;
+		validRow = findRowIndex(thisRow);
+		if (validRow == 0)
+		{
+			validSeat = findSeatIndex(thisSeat);
+			if (validSeat == 0)
+			{
+				
+			}
+			else
+			{
+				cout << "Sorry, no such seat exists on the CRJ 200." << endl;
+				validRow = 0;
+				validSeat = 0;
+			}
+		}
+		else
+		{
+			cout << "Sorry, no such seat exists on the CRJ 200." << endl;
+			validRow = 0;
+			validSeat = 0;
+		}
+	}
 }
 
 int findRowIndex(int thisRow)
 {
-
+	if (thisRow > 0 and thisRow < 9)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }
 
 int findSeatIndex(char thisSeat)
 {
-
+	if (thisSeat == 'A' or thisSeat == 'B' or thisSeat == 'C' or thisSeat == 'D')
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }
-
+/*
 void displaySeatColumn(char seats[][ROWS], int column)
 {
 	for (int i = 0; i < 8; i++)
@@ -54,3 +108,4 @@ void displaySeatColumn(char seats[][ROWS], int column)
 		cout << endl;
 	}
 }
+*/
